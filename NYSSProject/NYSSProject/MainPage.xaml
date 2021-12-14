@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MobApp" x:DataType="local:CypherViewModel"
+             x:Class="MobApp.MainPage" BindingContext="{Binding Source={RelativeSource Self}, Path=ViewModel}" Title="Код Вижинера">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Сохранить" Command="{Binding SaveCommand}"/>
+        <ToolbarItem Text="Открыть" Command="{Binding OpenCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <Style TargetType="Label" x:Key="textStyle">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="TextColor" Value="Black"/>
+        </Style>
+        <local:KeyConverter x:Key="KeyConverter"/>
+    </ContentPage.Resources>
+
+    <ScrollView Padding="10" VerticalOptions="FillAndExpand">
+        <Grid VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <StackLayout HorizontalOptions="Fill">
+                <Frame VerticalOptions="Start">
+                    <StackLayout>
+                        <Label Text="Ключ" Style="{StaticResource textStyle}" HorizontalOptions="Start"/>
+                        <Entry Text="{Binding Key, Converter={StaticResource KeyConverter}}" VerticalOptions="Start"/>
+                        <Label Text="{Binding Source={StaticResource KeyConverter}, Path=ErrorMessage}" TextColor="Red" 
+                               IsVisible="{Binding Source={StaticResource KeyConverter}, Path=HasErrors}" />
+                    </StackLayout>
+                </Frame>
+
+                <Frame VerticalOptions="Start">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <StackLayout>
+                            <Label Text="Текст" Style="{StaticResource textStyle}"/>
+                            <Editor Placeholder="Введите текст для преобразования или загрузите его из файла"
+                                Text="{Binding Text}" AutoSize="TextChanges"/>
+                        </StackLayout>
+                    </Grid>
+                </Frame>
+                <ImageButton WidthRequest="32" HeightRequest="32" MinimumHeightRequest="32" MinimumWidthRequest="32"
+                             Source="{local:ImageResource MobApp.images.swap.png}" Grid.Row="1" HorizontalOptions="CenterAndExpand"
+                             VerticalOptions="CenterAndExpand" Aspect="AspectFill" 
+                             Command="{Binding SwapCommand}" BackgroundColor="Transparent"/>
+
+                <Frame>
+                    <StackLayout>
+                        <Label Text="Преобразованный текст" Style="{StaticResource textStyle}"/>
+                        <Label Text="{Binding ConvertedText, TargetNullValue=Здесь будет отображаться преобразованный текст}" 
+                                   TextColor="Black"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+
+            <Frame VerticalOptions="End" Grid.Row="1" HorizontalOptions="Fill">
+                <Frame.Resources>
+                    <local:EnumConverter x:Key="converter" EnumType="{x:Type local:ConversionType}"/>
+                </Frame.Resources>
+                <Grid HorizontalOptions="Fill">
+                    <RadioButton Content="Зашифровать" HorizontalOptions="Start" Margin="-10, 0, 0, 0"
+                                     IsChecked="{Binding ConversionType, Converter={StaticResource converter}, ConverterParameter={x:Static local:ConversionType.Cypher}}"/>
+                    <RadioButton Content="Расшифровать" HorizontalOptions="End" Margin="10, 0, 0, 0"
+                                     IsChecked="{Binding ConversionType, Converter={StaticResource converter}, ConverterParameter={x:Static local:ConversionType.Decypher}}"/>
+                </Grid>
+            </Frame>
+        </Grid>
+    </ScrollView>
+</ContentPage>
