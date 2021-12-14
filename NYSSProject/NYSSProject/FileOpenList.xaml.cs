@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace MobApp;
+namespace NYSSProject;
 [XamlCompilation(XamlCompilationOptions.Compile)]
 public partial class FileOpenList : ContentPage
 {

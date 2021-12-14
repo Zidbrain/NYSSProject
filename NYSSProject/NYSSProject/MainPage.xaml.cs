@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace MobApp;
+namespace NYSSProject;
 
 public partial class MainPage : ContentPage
 {

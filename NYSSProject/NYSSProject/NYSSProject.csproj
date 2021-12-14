@@ -13,7 +13,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="images\swap.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="images\swap.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="images\swap.png" />
   </ItemGroup>
 
   <ItemGroup>

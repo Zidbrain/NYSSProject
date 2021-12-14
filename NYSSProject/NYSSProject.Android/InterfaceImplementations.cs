@@ -7,10 +7,10 @@ using Xamarin.Forms;
 using Xamarin.Essentials;
 using System.Threading.Tasks;
 
-[assembly: Dependency(typeof(MobApp.Droid.Alert))]
-[assembly: Dependency(typeof(MobApp.Droid.FilePicker))]
+[assembly: Dependency(typeof(NYSSProject.Droid.Alert))]
+[assembly: Dependency(typeof(NYSSProject.Droid.FilePicker))]
 
-namespace MobApp.Droid
+namespace NYSSProject.Droid
 {
     public class Alert : IAlert
     {
@@ -22,12 +22,12 @@ namespace MobApp.Droid
 
     public class FilePicker : IFilePickerService
     {
-        public async Task<string> PickForSaving(MainPage display)
+        public async Task<(Stream stream, string fileName)> PickForSaving(MainPage display)
         {
             var to = await display.DisplayActionSheet("Сохранить как...", "Отмена", null, ".docx", ".txt");
 
             if (to == "Отмена")
-                return null;
+                return (null, null);
 
             var result = await display.DisplayPromptAsync("Введите назание фалйа", "Файл будет сохранён в локальное хранилище приложения");
 
@@ -37,13 +37,13 @@ namespace MobApp.Droid
                 var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), result);
 
                 if (!File.Exists(path) || await display.DisplayAlert("Внимание", $"Файл с именем {result} уже существует\nПерезаписать файл?", "Да", "Нет"))
-                    return path;
+                    return (File.Create(path), result);
             }
 
-            return null;
+            return (null, null);
         }
 
-        public async Task<string> PickForOpenning(MainPage display)
+        public async Task<(Stream stream, string fileName)> PickForOpenning(MainPage display)
         {
             var from = await display.DisplayActionSheet("Открыть файл из...", "Отмена", null, "Внешнего хранилища", "Локального хранилища приложения");
 
@@ -76,7 +76,10 @@ namespace MobApp.Droid
                 list.Disappearing -= Set;
             }
 
-            return result;
+            if (result is null)
+                return (null, null);
+
+            return (File.OpenRead(result), Path.GetFileName(result));
         }
     }
 }

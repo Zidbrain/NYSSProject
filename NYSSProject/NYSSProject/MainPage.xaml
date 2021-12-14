@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:MobApp" x:DataType="local:CypherViewModel"
-             x:Class="MobApp.MainPage" BindingContext="{Binding Source={RelativeSource Self}, Path=ViewModel}" Title="Код Вижинера">
+             xmlns:local="clr-namespace:NYSSProject" x:DataType="local:CypherViewModel"
+             x:Class="NYSSProject.MainPage" BindingContext="{Binding Source={RelativeSource Self}, Path=ViewModel}" Title="Код Вижинера">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Сохранить" Command="{Binding SaveCommand}"/>
@@ -46,9 +46,9 @@
                         </StackLayout>
                     </Grid>
                 </Frame>
-                <ImageButton WidthRequest="32" HeightRequest="32" MinimumHeightRequest="32" MinimumWidthRequest="32"
-                             Source="{local:ImageResource MobApp.images.swap.png}" Grid.Row="1" HorizontalOptions="CenterAndExpand"
-                             VerticalOptions="CenterAndExpand" Aspect="AspectFill" 
+                <ImageButton WidthRequest="32" HeightRequest="32"
+                             Source="{local:ImageResource NYSSProject.images.swap.png}" HorizontalOptions="Center"
+                             VerticalOptions="Center" Aspect="AspectFit" 
                              Command="{Binding SwapCommand}" BackgroundColor="Transparent"/>
 
                 <Frame>

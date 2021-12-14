@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace MobApp.UWP
+namespace NYSSProject.UWP
 {
     public sealed partial class MainPage
     {
@@ -22,7 +22,7 @@ namespace MobApp.UWP
             this.InitializeComponent();
 
             Xamarin.Forms.DependencyService.Register<IAlert, Alert>();
-            LoadApplication(new MobApp.App());
+            LoadApplication(new NYSSProject.App());
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Runtime.CompilerServices;
 
-namespace MobApp;
+namespace NYSSProject;
 
 [ContentProperty(nameof(Source))]
 public class ImageResource : IMarkupExtension

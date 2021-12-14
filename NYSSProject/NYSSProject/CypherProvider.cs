@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using System.Text.RegularExpressions;
 
-namespace MobApp;
+namespace NYSSProject;
 
 public class CypherProvider
 {

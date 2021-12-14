@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace MobApp;
+namespace NYSSProject;
 
 public enum ConversionType
 {
@@ -38,10 +38,11 @@ public class CypherViewModel : INotifyPropertyChanged
             try
             {
                 var result = await DependencyService.Resolve<IFilePickerService>().PickForOpenning(_mainPage);
-                if (result is not null)
+                using var stream = result.stream;
+                if (stream is not null)
                 {
                     _conversionType = ConversionType.Decypher;
-                    Text = await ReadFromFileAsync(result);
+                    Text = await ReadFromFileAsync(stream, result.fileName);
                     OnPropertyChanged(nameof(ConversionType));
 
                     DependencyService.Resolve<IAlert>().Show($"Файл открыт");
@@ -57,11 +58,12 @@ public class CypherViewModel : INotifyPropertyChanged
         {
             try
             {
-                var path = await DependencyService.Resolve<IFilePickerService>().PickForSaving(_mainPage);
-                if (path is not null)
+                var result = await DependencyService.Resolve<IFilePickerService>().PickForSaving(_mainPage);
+                using var stream = result.stream;
+                if (stream is not null)
                 {
-                    await SaveToFileAsync(path, ConvertedText);
-                    DependencyService.Resolve<IAlert>().Show($"Файл сохранён в:{path}");
+                    await SaveToFileAsync(stream, result.fileName, ConvertedText);
+                    DependencyService.Resolve<IAlert>().Show($"Файл сохранён в: {result.fileName}");
                 }
             }
             catch (Exception)
@@ -71,13 +73,15 @@ public class CypherViewModel : INotifyPropertyChanged
         });
     }
 
-    public static async Task<string> ReadFromFileAsync(string path) =>
+    public static async Task<string> ReadFromFileAsync(Stream stream, string fileName) =>
         await Task.Run(() =>
         {
-            if (path.EndsWith(".txt"))
-                return File.ReadAllText(path);
+            if (fileName.EndsWith(".txt"))
+            {
+                using var streamReader = new StreamReader(stream);
+                return streamReader.ReadToEnd();
+            }
 
-            using var stream = File.OpenRead(path);
             var document = new XWPFDocument(stream);
 
             var result = new StringBuilder();
@@ -95,16 +99,16 @@ public class CypherViewModel : INotifyPropertyChanged
             return result.ToString();
         });
 
-    public static async Task SaveToFileAsync(string path, string text) =>
+    public static async Task SaveToFileAsync(Stream stream, string fileName, string text) =>
         await Task.Run(() =>
         {
-            if (path.EndsWith(".txt"))
+            if (fileName.EndsWith(".txt"))
             {
-                File.WriteAllText(path, text);
+                using var streamWriter = new StreamWriter(stream);
+                streamWriter.Write(text);
                 return;
             }
 
-            using var stream = File.Create(path);
             var document = new XWPFDocument();
             foreach (var line in text.Split('\n'))
             {

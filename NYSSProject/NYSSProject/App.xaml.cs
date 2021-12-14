@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace MobApp;
+namespace NYSSProject;
 public partial class App : Application
 {
     public App()

@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using System.Globalization;
 
-namespace MobApp;
+namespace NYSSProject;
 
 [ContentProperty(nameof(EnumType))]
 public class EnumConverter : IValueConverter

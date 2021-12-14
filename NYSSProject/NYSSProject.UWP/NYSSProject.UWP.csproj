@@ -7,8 +7,8 @@
     <ProjectGuid>{72758667-3920-4FB4-AA01-10461D0FB17E}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MobApp.UWP</RootNamespace>
-    <AssemblyName>MobApp.UWP</AssemblyName>
+    <RootNamespace>NYSSProject.UWP</RootNamespace>
+    <AssemblyName>NYSSProject.UWP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>

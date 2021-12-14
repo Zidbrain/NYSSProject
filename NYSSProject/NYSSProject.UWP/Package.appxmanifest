@@ -4,6 +4,7 @@
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
   IgnorableNamespaces="uap mp">
 
   <Identity
@@ -14,7 +15,7 @@
   <mp:PhoneIdentity PhoneProductId="ec0cc741-fd3e-485c-81be-68815c480690" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>MobApp.UWP</DisplayName>
+    <DisplayName>NYSSProject.UWP</DisplayName>
     <PublisherDisplayName>5B8E8997-73DE-4F5B-AE55-1A94D6922CDB</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -30,12 +31,12 @@
   <Applications>
     <Application Id="App"
       Executable="$targetnametoken$.exe"
-      EntryPoint="MobApp.UWP.App">
+      EntryPoint="NYSSProject.UWP.App">
       <uap:VisualElements
-        DisplayName="MobApp.UWP"
+        DisplayName="NYSSProject"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="MobApp.UWP"
+        Description="NyssProject.UWP"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png">
           <uap:ShowNameOnTiles>
@@ -46,10 +47,22 @@
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
+      <Extensions>
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name="filetypea">
+            <uap:SupportedFileTypes>
+              <uap:FileType ContentType="text/plain">.txt</uap:FileType>
+              <uap:FileType ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document">.docx</uap:FileType>
+            </uap:SupportedFileTypes>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
+      </Extensions>
     </Application>
   </Applications>
 
   <Capabilities>
+    <rescap:Capability Name="broadFileSystemAccess" />
     <Capability Name="internetClient" />
+    <uap:Capability Name="removableStorage"/>
   </Capabilities>
 </Package>

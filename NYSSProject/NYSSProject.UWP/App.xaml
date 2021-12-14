@@ -1,7 +1,7 @@
 ﻿<Application
-    x:Class="MobApp.UWP.App"
+    x:Class="NYSSProject.UWP.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:MobApp.UWP">
+    xmlns:local="using:NYSSProject.UWP">
 
 </Application>

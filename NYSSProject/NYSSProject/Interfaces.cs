@@ -1,4 +1,4 @@
-﻿namespace MobApp;
+﻿namespace NYSSProject;
 
 public interface IAlert
 {
@@ -7,6 +7,6 @@ public interface IAlert
 
 public interface IFilePickerService
 {
-    Task<string> PickForSaving(MainPage display);
-    Task<string> PickForOpenning(MainPage display);
+    Task<(Stream stream, string fileName)> PickForSaving(MainPage display);
+    Task<(Stream stream, string fileName)> PickForOpenning(MainPage display);
 }

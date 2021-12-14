@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using MobApp;
+using NYSSProject;
 
 namespace Tests;
 public class Cypher_Tests
